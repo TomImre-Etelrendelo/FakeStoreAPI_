@@ -59,7 +59,7 @@ const AdminView = () => {
       <Table onModifyClick={handleModifyClick} />
       
       {/* Show the form when showModifyForm is true */}
-      {showModifyForm ? <ModifyProductForm product={selectedProduct} />:"modositform"}
+      {showModifyForm ? <ModifyProductForm product={selectedProduct} />:""}
     </div>
         </article>
     </div>
