@@ -13,7 +13,7 @@ function App() {
         <p>This is the admin dashboard.</p>
         <div>
       <h1>Dynamic Table</h1>
-      <Table columns={columns} data={data} />
+      <Table/>
     </div>
       </article>
     </div>
