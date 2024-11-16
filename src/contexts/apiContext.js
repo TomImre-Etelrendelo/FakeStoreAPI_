@@ -6,6 +6,7 @@ export const ApiContext = createContext("");
 export const ApiProvider = ({ children }) => {
   const [pList, setPList] = useState([]); // product list
   const [cList, setCList] = useState([]); // category list
+  const [singleProduct, setSingleProduct] = useState(null); // to hold a single product
 
   // Function to fetch data from the endpoint
   function getData(endpoint) {
@@ -21,6 +22,18 @@ export const ApiProvider = ({ children }) => {
       })
       .catch(function (error) {
         console.log(error);
+      });
+  }
+
+  function getSingleProduct(id) {
+    myAxios
+      .get(`/products/${id}`)
+      .then((response) => {
+        console.log(response.data);
+        setSingleProduct(response.data); // Store the single product in the state
+      })
+      .catch((error) => {
+        console.error(error);
       });
   }
 
@@ -43,7 +56,7 @@ export const ApiProvider = ({ children }) => {
   }
 
   return (
-    <ApiContext.Provider value={{ pList, cList, postData }}>
+    <ApiContext.Provider value={{ pList, cList, postData, singleProduct, getSingleProduct }}>
       {children}
     </ApiContext.Provider>
   );

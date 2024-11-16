@@ -11,7 +11,6 @@ const AdminView = () => {
           <h1>Admin Dashboard</h1>
           <p>This is the admin dashboard.</p>
           <div>
-        <h1>Dynamic Table</h1>
         <Table columns={columns} data={data}/> 
       </div>
         </article>
