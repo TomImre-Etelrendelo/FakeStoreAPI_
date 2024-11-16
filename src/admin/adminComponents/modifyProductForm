@@ -1,0 +1,102 @@
+import { useContext, useState } from "react";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
+import { ApiContext } from "../../contexts/apiContext";
+
+function ModifyProductForm({ productId, existingProductData }) {
+    const [data, setData] = useState({
+      title: "",
+      price: "",
+      category: "",
+      description: "",
+      image: "",
+    });
+  
+    // Initialize form with existing product data when the component mounts
+useEffect(() => {
+  if (existingProductData) {
+    setData({
+      title: existingProductData.title,
+      price: existingProductData.price,
+      category: existingProductData.category,
+      description: existingProductData.description,
+      image: existingProductData.image,
+    });
+  }
+}, [existingProductData]);
+
+  
+    // Handle form changes
+    const onChangeEvent = (event) => {
+      const { id, value } = event.target;
+      setData((prevData) => ({
+        ...prevData,
+        [id]: value,
+      }));
+    };
+  
+    const sendEvent = (event) => {
+        event.preventDefault();
+        modifyData(productId, data);  // data contains the updated product details
+      };
+  
+    return (
+      <Form onSubmit={sendEvent}>
+        <Form.Group className="mb-3" controlId="title">
+          <Form.Label>Name</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Enter product name"
+            value={data.title}
+            onChange={onChangeEvent}
+          />
+        </Form.Group>
+  
+        <Form.Group className="mb-3" controlId="price">
+          <Form.Label>Price</Form.Label>
+          <Form.Control
+            type="number"
+            placeholder="Enter product price"
+            value={data.price}
+            onChange={onChangeEvent}
+          />
+        </Form.Group>
+  
+        <Form.Group className="mb-3" controlId="category">
+          <Form.Label>Category</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Enter product Category"
+            value={data.category}
+            onChange={onChangeEvent}
+          />
+        </Form.Group>
+  
+        <Form.Group className="mb-3" controlId="description">
+          <Form.Label>Description</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Enter product description"
+            value={data.description}
+            onChange={onChangeEvent}
+          />
+        </Form.Group>
+  
+        <Form.Group className="mb-3" controlId="image">
+          <Form.Label>Image URL</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Enter product image URL"
+            value={data.image}
+            onChange={onChangeEvent}
+          />
+        </Form.Group>
+  
+        <Button variant="primary" type="submit">
+          Update Product
+        </Button>
+      </Form>
+    );
+  }
+  
+  export default ModifyProductForm;
