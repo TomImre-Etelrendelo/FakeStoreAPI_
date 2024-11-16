@@ -1,6 +1,5 @@
-import React, { useContext } from 'react';
+import React, { useContext } from "react";
 import { ApiContext } from "../../contexts/apiContext";
-
 
 import { Table } from "react-bootstrap"; // Import the Table component from react-bootstrap
 
@@ -10,13 +9,14 @@ function ProductTable() {
   return (
     <div>
       <h1>Product Table</h1>
-      <Table striped bordered hover >
+      <Table striped bordered hover>
         <thead>
           <tr>
             <th>#</th>
             <th>Name</th>
             <th>Price</th>
             <th>Category</th>
+            <th>Description</th>
           </tr>
         </thead>
         <tbody>
@@ -27,6 +27,7 @@ function ProductTable() {
                 <td>{product.title}</td>
                 <td>{product.price}</td>
                 <td>{product.category}</td>
+                <td>{product.description}</td>
               </tr>
             ))
           ) : (
@@ -41,4 +42,3 @@ function ProductTable() {
 }
 
 export default ProductTable;
-
