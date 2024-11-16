@@ -37,6 +37,18 @@ export const ApiProvider = ({ children }) => {
       });
   }
 
+  function addProduct(newProduct) {
+    myAxios
+      .post("/products", newProduct)
+      .then((response) => {
+        console.log("Product added:", response.data);
+        setPList((prevList) => [...prevList, response.data]); // Add the new product to the product list
+      })
+      .catch((error) => {
+        console.error("Error adding product:", error);
+      });
+  }
+
   useEffect(() => {
     // Fetch data once when the component mounts
     getData("/products");
@@ -56,7 +68,7 @@ export const ApiProvider = ({ children }) => {
   }
 
   return (
-    <ApiContext.Provider value={{ pList, cList, postData, singleProduct, getSingleProduct }}>
+    <ApiContext.Provider value={{ pList, cList, postData, singleProduct, getSingleProduct, addProduct  }}>
       {children}
     </ApiContext.Provider>
   );
