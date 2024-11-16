@@ -1,18 +1,18 @@
+import { Nav } from "react-bootstrap";
 import { Outlet, Link } from "react-router-dom";
 
 const Layout = () => {
   return (
     <>
-      <nav>
-        <ul>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/admin">Admin</Link>
-          </li>
-        </ul>
-      </nav>
+
+      <Nav defaultActiveKey="/" as="ul">
+      <Nav.Item as="li">
+        <Nav.Link href="/">Home</Nav.Link>
+      </Nav.Item>
+      <Nav.Item as="li">
+        <Nav.Link href="/admin">Admin</Nav.Link>
+      </Nav.Item>
+    </Nav>
 
       <Outlet />
     </>
