@@ -1,19 +1,16 @@
 import React from 'react';
+import Layout from "./pages/Layout"; 
 import PublicView from './pages/publicView';
 import AdminView from './pages/adminView';
-
-// Helper function to get the current path
-const getCurrentPath = () => {
-  return window.location.pathname;
-};
+import NoPage from "./pages/noPage";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import  AppRoutes  from './config/routes';
 
 function App() {
-  const currentPath = getCurrentPath();
-
   return (
-    <div>
-      {currentPath === '/admin' ? <AdminView /> : <PublicView />}
-    </div>
+    <BrowserRouter>
+    <AppRoutes />  {/* Use the imported routes */}
+  </BrowserRouter>
   );
 }
 
