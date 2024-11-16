@@ -1,8 +1,11 @@
 import React from 'react';
 import { columns, data } from './tableData.js';  // Import columns and data
-
+import { ApiContext } from "../../contexts/apiContext";
 
 function Table({ columns, data }) {
+
+
+
     return (
       <table border="1">
         <thead>
