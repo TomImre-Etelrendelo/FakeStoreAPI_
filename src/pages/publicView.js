@@ -1,14 +1,11 @@
 import React from 'react';
+import Cards from '../public/publicComponents/Cards';
 
 const AdminView = () => {
   return (
     <div>
       <h1>TomImre webshop</h1>
-          <article>
-          <h1>Tomi Dashboard</h1>
-          <div>
-      </div>
-        </article>
+      <Cards></Cards>
     </div>
   );
 };

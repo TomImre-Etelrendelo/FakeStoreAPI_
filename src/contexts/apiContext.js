@@ -17,7 +17,7 @@ export const ApiProvider = ({ children }) => {
         if (endpoint === "/products") {
           setPList(response.data);
         } else if (endpoint === "/products/categories") {
-          setCList(response.data);
+            
         }
       })
       .catch(function (error) {
