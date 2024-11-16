@@ -3,6 +3,9 @@ import Layout from "../pages/Layout";
 import PublicView from '../pages/publicView'    
 import AdminView from '../pages/adminView'
 import NoPage from "../pages/noPage";
+import SelectedProduct from "../public/publicComponents/SelectedProduct";
+
+
 
 function AppRoutes() {
   return (
@@ -12,6 +15,7 @@ function AppRoutes() {
         <Route path="admin" element={<AdminView />} />
         <Route path="public" element={<PublicView />} />
         <Route path="*" element={<NoPage />} />
+        <Route path="/product/:productId" element={<SelectedProduct />} />
       </Route>
     </Routes>
   );

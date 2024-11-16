@@ -1,9 +1,11 @@
 import React, { useContext, useState } from "react";
 import { ApiContext } from "../../contexts/apiContext";
 import ProductCard from "./ProductCard";
+import { useNavigate } from "react-router-dom";
 
 function Cards() {
   const { pList } = useContext(ApiContext);
+  const navigate = useNavigate();
 
   // State to hold the search query
   const [searchQuery, setSearchQuery] = useState("");
@@ -18,6 +20,10 @@ function Cards() {
     product.title.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
+  const handleViewProduct = (productId) => {
+    navigate(`/product/${productId}`);
+  };
+
   return (
     <div>
       <input
@@ -31,12 +37,17 @@ function Cards() {
       <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
         {filteredProducts.length > 0 ? (
           filteredProducts.map((product) => (
-            <ProductCard
-              key={product.id}
-              title={product.title}
-              image={product.image}
-              description={product.description}
-            />
+            <div>
+              <ProductCard
+                key={product.id}
+                title={product.title}
+                image={product.image}
+                description={product.description}
+              />
+              <button onClick={() => handleViewProduct(product.id)}>
+                View Product
+              </button>
+            </div>
           ))
         ) : (
           <p>No products found</p>
