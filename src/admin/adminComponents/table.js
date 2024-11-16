@@ -2,9 +2,12 @@ import React, { useContext, useState } from "react";
 import { ApiContext } from "../../contexts/apiContext";
 import Button from 'react-bootstrap/Button';
 import { Table } from "react-bootstrap"; // Import the Table component from react-bootstrap
+import ModifyProductForm from './modifyProductForm';
 
-function ProductTable() {
+function ProductTable({onModifyClick}) {
   const { pList, deleteData } = useContext(ApiContext);  // Make sure deleteData is available in context
+  const {modifyData} = useContext(ApiContext)
+
 
 
 
@@ -33,7 +36,7 @@ function ProductTable() {
                 <td>{product.price}</td>
                 <td>{product.category}</td>
                 <td>{product.description}</td>
-                <td><Button variant='warning'  onClick={() => deleteData(product.id)}>Modify</Button></td>
+                <td><Button variant='warning'  onClick={() => onModifyClick(product)}>Modify</Button></td>
                 <td><Button variant='danger'  onClick={() => deleteData(product.id)}>Delete</Button></td>
               </tr>
             ))

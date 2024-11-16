@@ -81,22 +81,22 @@ export const ApiProvider = ({ children }) => {
     });
 }
 
-function modifyData(id, updatedProduct){
+function modifyData(id, updatedProduct) {
   myAxios
-  .put(`/products/${id}`)
-  .then(function (response) {
-    console.log("Product modified: ", response.data);
+    .put(`/products/${id}`, updatedProduct) // Pass updatedProduct as the request body
+    .then(function (response) {
+      console.log("Product modified: ", response.data);
       // Update the product list after modification
       setPList((prevList) =>
         prevList.map((product) =>
-          product.id === id ? { ...product, ...updatedProduct } : product
+          product.id === id ? { ...product, ...response.data } : product
         )
-      )
-})
-.catch(function (error) {
-  console.error("Error modifying product:", error);
-});
-}
+      );
+    })
+    .catch(function (error) {
+      console.error("Error modifying product: ", error);
+    })
+  }
 
   return (
     <ApiContext.Provider value={{ pList, cList, postData, singleProduct, getSingleProduct, addProduct, deleteData, modifyData  }}>

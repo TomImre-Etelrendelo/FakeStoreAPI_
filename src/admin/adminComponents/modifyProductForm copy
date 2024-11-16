@@ -1,0 +1,95 @@
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+
+function ModifyProductForm({ product, onClose }) {
+  const [formData, setFormData] = useState({
+    name: '',
+    price: '',
+    category: '',
+    description: '',
+  });
+
+
+  useEffect(() => {
+    if (product) {
+      setFormData({
+        name: product.name,
+        price: product.price,
+        category: product.category,
+        description: product.description,
+      });
+    }
+  }, [product]);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    // Send update request to the server
+    axios
+      .put(`/products/${product.id}`, formData)
+      .then((response) => {
+        console.log('Product modified: ', response.data);
+        onClose(); // Close the form after successful modification
+      })
+      .catch((error) => {
+        console.error('Error modifying product:', error);
+      });
+  };
+
+  return (
+    <div className="modal">
+      <h2>Modify Product</h2>
+      <form onSubmit={handleSubmit}>
+        <div>
+          <label>Name:</label>
+          <input
+            type="text"
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
+          />
+        </div>
+        <div>
+          <label>Price:</label>
+          <input
+            type="number"
+            name="price"
+            value={formData.price}
+            onChange={handleChange}
+          />
+        </div>
+        <div>
+          <label>Category:</label>
+          <input
+            type="text"
+            name="category"
+            value={formData.category}
+            onChange={handleChange}
+          />
+        </div>
+        <div>
+          <label>Description:</label>
+          <textarea
+            name="description"
+            value={formData.description}
+            onChange={handleChange}
+          />
+        </div>
+        <button type="submit">Update</button>
+        <button type="button" onClick={onClose}>
+          Cancel
+        </button>
+      </form>
+    </div>
+  );
+}
+
+export default ModifyProductForm;
