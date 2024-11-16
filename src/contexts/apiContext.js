@@ -67,8 +67,39 @@ export const ApiProvider = ({ children }) => {
       });
   }
 
+  function deleteData(id){
+    myAxios
+    .delete(`/products/${id}`)
+    .then(function (response) {
+      console.log("Product deleted:", response.data);
+      
+      // Update the product list after deletion
+      setPList((prevList) => prevList.filter((product) => product.id !== id)); 
+    })
+    .catch(function (error) {
+      console.error("Error deleting product:", error);
+    });
+}
+
+function modifyData(id, updatedProduct){
+  myAxios
+  .put(`/products/${id}`)
+  .then(function (response) {
+    console.log("Product modified: ", response.data);
+      // Update the product list after modification
+      setPList((prevList) =>
+        prevList.map((product) =>
+          product.id === id ? { ...product, ...updatedProduct } : product
+        )
+      )
+})
+.catch(function (error) {
+  console.error("Error modifying product:", error);
+});
+}
+
   return (
-    <ApiContext.Provider value={{ pList, cList, postData, singleProduct, getSingleProduct, addProduct  }}>
+    <ApiContext.Provider value={{ pList, cList, postData, singleProduct, getSingleProduct, addProduct, deleteData, modifyData  }}>
       {children}
     </ApiContext.Provider>
   );
