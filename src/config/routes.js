@@ -4,6 +4,7 @@ import PublicView from '../pages/publicView'
 import AdminView from '../pages/adminView'
 import NoPage from "../pages/noPage";
 import SelectedProduct from "../public/publicComponents/SelectedProduct";
+import CartView from "../public/cart/CartView";
 
 
 
@@ -14,6 +15,7 @@ function AppRoutes() {
         <Route index element={<PublicView />} />
         <Route path="admin" element={<AdminView />} />
         <Route path="public" element={<PublicView />} />
+        <Route path="cart" element={<CartView />} />
         <Route path="*" element={<NoPage />} />
         <Route path="/product/:productId" element={<SelectedProduct />} />
       </Route>

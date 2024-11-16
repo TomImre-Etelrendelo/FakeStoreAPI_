@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { ApiContext } from "../../contexts/apiContext";
 import ProductCard from "./ProductCard";
 import { useNavigate } from "react-router-dom";
-
+import { Button } from "react-bootstrap";
 function Cards() {
   const { pList } = useContext(ApiContext);
   const navigate = useNavigate();
@@ -37,16 +37,16 @@ function Cards() {
       <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
         {filteredProducts.length > 0 ? (
           filteredProducts.map((product) => (
-            <div>
-              <ProductCard
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+              <ProductCard 
                 key={product.id}
                 title={product.title}
                 image={product.image}
                 description={product.description}
               />
-              <button onClick={() => handleViewProduct(product.id)}>
+              <Button variant="primary" onClick={() => handleViewProduct(product.id)} style={{ marginTop: "5px"}}>
                 View Product
-              </button>
+              </Button>
             </div>
           ))
         ) : (
