@@ -1,21 +1,18 @@
-import logo from './logo.svg';
-import './App.css';
-import Table from './admin/adminComponents/table.js';  // Import Table component
-import { columns, data } from './admin/adminComponents/tableData.js';
+import React from 'react';
+import PublicView from './pages/publicView';
+import AdminView from './pages/adminView';
+
+// Helper function to get the current path
+const getCurrentPath = () => {
+  return window.location.pathname;
+};
+
 function App() {
+  const currentPath = getCurrentPath();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        Admin
-      </header>
-      <article>
-        <h1>Admin Dashboard</h1>
-        <p>This is the admin dashboard.</p>
-        <div>
-      <h1>Dynamic Table</h1>
-      <Table columns={columns} data={data}/> 
-    </div>
-      </article>
+    <div>
+      {currentPath === '/admin' ? <AdminView /> : <PublicView />}
     </div>
   );
 }
